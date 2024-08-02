@@ -26,12 +26,12 @@ CREATE TABLE SocialAccounts
 
 CREATE TABLE Wallet
 (
-    Wallet_Id   INT AUTO_INCREMENT PRIMARY KEY,                                 -- wallet_id
-    User_Id     INT,                                                            -- user_id
-    Name        VARCHAR(100) NOT NULL,                                          -- name
-    Description TEXT,                                                           -- description
-    Create_At   DATETIME DEFAULT CURRENT_TIMESTAMP,                             -- created_at
-    Update_At   DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- updated_at
+    Wallet_Id   INT AUTO_INCREMENT PRIMARY KEY,
+    User_Id     INT,
+    Name        VARCHAR(100) NOT NULL,
+    Description TEXT,
+    Create_At   DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Update_At   DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT FK_Wallet_User FOREIGN KEY (User_Id)
         REFERENCES User (UserId)
         ON DELETE CASCADE
@@ -39,37 +39,37 @@ CREATE TABLE Wallet
 
 CREATE TABLE Transaction
 (
-    Transaction_Id   INT AUTO_INCREMENT PRIMARY KEY,                                 -- transaction_id
-    User_Id          INT,                                                            -- user_id
-    Wallet_Id        INT,                                                            -- wallet_id
-    Category_Id      INT,                                                            -- category_id
-    Amount           DECIMAL(10, 2)             NOT NULL,                            -- amount
-    Note             TEXT,                                                           -- note
-    Transaction_Type ENUM ('income', 'expense') NOT NULL,                            -- transaction_type ('income', 'expense')
-    Transaction_Date DATETIME DEFAULT CURRENT_TIMESTAMP,                             -- transaction_date
-    Create_At        DATETIME DEFAULT CURRENT_TIMESTAMP,                             -- created_at
-    Update_At        DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- updated_at
+    Transaction_Id   INT AUTO_INCREMENT PRIMARY KEY,
+    User_Id          INT,
+    Wallet_Id        INT,
+    Category_Id      INT,
+    Amount           DECIMAL(10, 2)             NOT NULL,
+    Note             TEXT,
+    Transaction_Type ENUM ('income', 'expense') NOT NULL,
+    Transaction_Date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Create_At        DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Update_At        DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT FK_Transaction_User FOREIGN KEY (User_Id)
         REFERENCES User (UserId)
-        ON DELETE CASCADE,                                                           -- Xóa giao dịch khi xóa người dùng
+        ON DELETE CASCADE,
     CONSTRAINT FK_Transaction_Wallet FOREIGN KEY (Wallet_Id)
         REFERENCES Wallet (Wallet_Id)
-        ON DELETE CASCADE,                                                           -- Xóa giao dịch khi xóa ví tiền
+        ON DELETE CASCADE,
     CONSTRAINT FK_Transaction_Categories FOREIGN KEY (Category_Id)
         REFERENCES Categories (Category_Id)
-        ON DELETE SET NULL                                                           -- Đặt danh mục thành NULL khi xóa danh mục
+        ON DELETE SET NULL
 );
 
 CREATE TABLE Categories
 (
-    Category_Id INT AUTO_INCREMENT PRIMARY KEY,                                 -- category_id
-    User_Id     INT,                                                            -- user_id
-    Name        VARCHAR(100) NOT NULL,                                          -- name
-    Note         TEXT,                                                           -- note
-    Create_At   DATETIME DEFAULT CURRENT_TIMESTAMP,                             -- created_at
-    Update_At   DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- updated_at
+    Category_Id INT AUTO_INCREMENT PRIMARY KEY,
+    User_Id     INT,
+    Name        VARCHAR(100) NOT NULL,
+    Note        TEXT,
+    Create_At   DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Update_At   DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT FK_Categories_User FOREIGN KEY (User_Id)
         REFERENCES User (UserId)
-        ON DELETE CASCADE                                                       -- Xóa danh mục khi xóa người dùng
+        ON DELETE CASCADE                                                       
 );
 
