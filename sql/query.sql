@@ -70,6 +70,7 @@ CREATE TABLE Categories
     Update_At   DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT FK_Categories_User FOREIGN KEY (User_Id)
         REFERENCES User (UserId)
-        ON DELETE CASCADE                                                       
+        ON DELETE CASCADE
 );
+select * from categories;
 
